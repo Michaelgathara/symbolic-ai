@@ -1,3 +1,14 @@
+/*
+    To run:
+
+    swipl relation.pl
+
+    > This enters a query system. In the query system, you can enter small queries such as 
+    ?- sibling(jim, ann).
+
+    > which would return "true"
+*/
+
 parent(john, jim).
 parent(john, ann).
 parent(mary, jim).
@@ -15,15 +26,3 @@ male(jim).
 male(billy).
 female(mary).
 female(ann).
-
-
-/*
-    To run:
-
-    swipl relation.pl
-
-    > This enters a query system. In the query system, you can enter small queries such as 
-    ?- sibling(jim, ann).
-
-    > which would return "true"
-*/
