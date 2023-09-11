@@ -1,0 +1,2 @@
+class MNISTNet(nn.Module):
+    
