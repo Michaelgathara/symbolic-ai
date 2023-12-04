@@ -92,19 +92,26 @@ student("S10", "CS421").
 student("S10", "CS422").
 
 
-.decl eligibleForCourse(studentId: symbol, courseId: symbol)
+.decl Conflict(studentId: symbol, courseId: symbol)
+Conflict(S, C) :-
+    student(S, C1),
+    courseOffering(C1, _, T),
+    courseOffering(C, _, T),
+    C != C1.
 
+.decl eligibleForCourse(studentId: symbol, courseId: symbol)
 eligibleForCourse(S, C) :- 
     course(C, _, _), 
     prerequisite(P, C), 
     student(S, P),
-    !student(S, C).
+    !student(S, C),
+    !Conflict(S, C).
 
-// Students should also be able to signup for classes without pre-reqs 
 eligibleForCourse(S, C) :- 
     course(C, _, _), 
     !prerequisite(_, C),
     student(S, _),
-    !student(S, C).
+    !student(S, C),
+    !Conflict(S, C).
 
 .output eligibleForCourse

@@ -2,7 +2,7 @@
 This project acts as the bonus points opportunity for CS660. I took inspiration from my recent troubles of signing up for classes at UAB and thought to make a university course scheduler program on their data. 
 
 ## Overview
-The project allows for a programmer to input data based on their school's catalog then input student data of which classes they have taken. The output includes classes of which the student may take given their previous classes. 
+The project allows for a programmer to input data based on their school's catalog then input student data of which classes they have taken. The output includes classes of which the student may take given their previous classes. The program also checks for conflicts, this way a student does not get recommended two classes that conflict with each other
 
 ## Running
 * Make sure you have Souffle installed: https://souffle-lang.github.io/install
@@ -26,5 +26,5 @@ Data is borrowed (I will give it back) from UAB's Computer Science Catalog
 
 ## Future Enhancements
 * Taking in input from a csv
-* Adding a time to the project
+* Adding a more useful time slot, start and end time for class
 * 
