@@ -1,0 +1,110 @@
+.decl course(courseId: symbol, name: symbol, credits: number)
+.decl prerequisite(preCourseId: symbol, courseID: symbol)
+.decl student(studentId: symbol, completedCourse: symbol)
+.decl courseOffering(courseId: symbol, semester: symbol, timeSlot: symbol)
+
+// Courses from UAB's catalog 
+// https://catalog.uab.edu/undergraduate/collegeofartsciences/computerscience/#courseinventory
+course("CS103", "Intro to Computer Science in Python", 4).
+course("CS203", "Object-Oriented Programming in Java", 4).
+course("CS250", "Discrete Structures", 3).
+course("CS303", "Algorithms and Data Structures", 3).
+course("CS330", "Computer Organization and Assembly Language Programming", 3).
+course("CS334", "Networking", 3).
+course("CS350", "Automata and Formal Languages", 3).
+course("CS355", "Probability and Statistics in Computer Science", 3).
+course("CS380", "Matrix Computation", 3).
+course("CS401", "Programming Paradigms", 3).
+course("CS402", "Compiler Design", 3).
+course("CS403", "Cloud Computing", 3).
+course("CS410", "Database Application Development", 3).
+course("CS415", "Multimedia Databases", 3).
+course("CS416", "Big Data Programming", 3).
+course("CS417", "Database Security", 3).
+course("CS419", "Investigating Online Crimes", 3).
+course("CS420", "Software Engineering", 3).
+course("CS421", "Advanced Web Application Development", 3).
+course("CS422", "Mobile Application Development", 3).
+
+courseOffering("CS103", "Fall2023", "Morning").
+courseOffering("CS203", "Spring2024", "Afternoon").
+courseOffering("CS250", "Fall2023", "Evening").
+courseOffering("CS303", "Spring2024", "Morning").
+courseOffering("CS330", "Summer2024", "Afternoon").
+courseOffering("CS334", "Fall2023", "Evening").
+courseOffering("CS350", "Spring2024", "Morning").
+courseOffering("CS355", "Summer2024", "Afternoon").
+courseOffering("CS380", "Fall2023", "Evening").
+courseOffering("CS401", "Spring2024", "Morning").
+courseOffering("CS402", "Fall2023", "Afternoon").
+courseOffering("CS403", "Spring2024", "Evening").
+courseOffering("CS410", "Summer2024", "Morning").
+courseOffering("CS415", "Fall2023", "Afternoon").
+courseOffering("CS416", "Spring2024", "Evening").
+courseOffering("CS417", "Summer2024", "Morning").
+courseOffering("CS419", "Fall2023", "Afternoon").
+courseOffering("CS420", "Spring2024", "Evening").
+courseOffering("CS421", "Summer2024", "Morning").
+courseOffering("CS422", "Fall2023", "Afternoon").
+
+// Prerequisites
+prerequisite("MA106", "CS103"). 
+prerequisite("CS103", "CS203").
+prerequisite("CS103", "CS250"). 
+prerequisite("CS250", "CS303").
+prerequisite("CS203", "CS303").
+prerequisite("CS250", "CS330").
+prerequisite("CS203", "CS330").
+prerequisite("CS250", "CS334").
+prerequisite("CS203", "CS334").
+prerequisite("CS203", "CS350"). 
+prerequisite("CS303", "CS402").
+prerequisite("CS303", "CS403").
+prerequisite("CS303", "CS410"). 
+prerequisite("CS303", "CS415"). 
+prerequisite("CS303", "CS416"). 
+prerequisite("CS303", "CS417"). 
+prerequisite("CS303", "CS419"). 
+prerequisite("CS303", "CS420"). 
+prerequisite("CS303", "CS421"). 
+prerequisite("CS303", "CS422"). 
+
+
+// some fake data about students that I made up
+student("S1", "CS103").
+student("S1", "CS203").
+student("S2", "CS250").
+student("S2", "CS303").
+student("S3", "CS330").
+student("S4", "CS350").
+student("S4", "CS355").
+student("S5", "CS380").
+student("S5", "CS401").
+student("S6", "CS402").
+student("S6", "CS403").
+student("S7", "CS410").
+student("S7", "CS415").
+student("S8", "CS416").
+student("S8", "CS417").
+student("S9", "CS419").
+student("S9", "CS420").
+student("S10", "CS421").
+student("S10", "CS422").
+
+
+.decl eligibleForCourse(studentId: symbol, courseId: symbol)
+
+eligibleForCourse(S, C) :- 
+    course(C, _, _), 
+    prerequisite(P, C), 
+    student(S, P),
+    !student(S, C).
+
+// Students should also be able to signup for classes without pre-reqs 
+eligibleForCourse(S, C) :- 
+    course(C, _, _), 
+    !prerequisite(_, C),
+    student(S, _),
+    !student(S, C).
+
+.output eligibleForCourse
